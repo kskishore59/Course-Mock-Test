@@ -11,10 +11,9 @@ const App = () => (
   <div>
     <Switch>
       <Route exact path="/" component={Home} />
-
       <Route exact path="/courses/:id" component={ItemDetails} />
-
-      <Route component={NotFoundView} />
+      <Route path="/not-found" component={NotFoundView} />
+      <Redirect to="/not-found" />
     </Switch>
   </div>
 )

@@ -52,8 +52,11 @@ class Home extends Component {
         courseList: updatedData,
         apiStatus: apiStatusConstants.success,
       })
-    } else if (response.ok !== true) {
-      this.setState({apiStatus: apiStatusConstants.failure})
+    }
+    if (response.ok !== true) {
+      this.setState({
+        apiStatus: apiStatusConstants.failure,
+      })
     }
   }
 

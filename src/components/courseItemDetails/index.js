@@ -36,11 +36,11 @@ class ItemDetails extends Component {
     const {params} = match
     const {id} = params
 
-    const url = `https://apis.ccbp.in/te/courses/${id}`
+    const courseItemDetailsApiUrl = `https://apis.ccbp.in/te/courses/${id}`
     const options = {
       method: 'GET',
     }
-    const response = await fetch(url, options)
+    const response = await fetch(courseItemDetailsApiUrl, options)
     const fetchedData = await response.json()
     const updatedData = {
       description: fetchedData.course_details.description,
@@ -49,9 +49,15 @@ class ItemDetails extends Component {
       name: fetchedData.course_details.name,
     }
     if (response.ok) {
-      this.setState({itemDetails: updatedData})
-    } else if (response.ok !== true) {
-      this.setState({apiStatus: apiStatusConstants.failure})
+      this.setState({
+        itemDetails: updatedData,
+        apiStatus: apiStatusConstants.success,
+      })
+    }
+    if (response.ok !== true) {
+      this.setState({
+        apiStatus: apiStatusConstants.failure,
+      })
     }
   }
 
@@ -73,14 +79,12 @@ class ItemDetails extends Component {
   }
 
   renderFailureView = () => (
-    <ErrorViewContainer >
+    <ErrorViewContainer>
       <ErrorViewImage
         alt="failure view"
         src="https://assets.ccbp.in/frontend/react-js/tech-era/failure-img.png"
       />
-      <ErrorViewHeading >
-        Oops! Something Went Wrong
-      </ErrorViewHeading>
+      <ErrorViewHeading>Oops! Something Went Wrong</ErrorViewHeading>
       <ErrorViewPara>
         We cannot seem to find the page you are looking for
       </ErrorViewPara>
